@@ -18,4 +18,10 @@ namespace pkodev {
 	import::operator_delete_array_Ptr import::operator_delete_array = reinterpret_cast<import::operator_delete_array_Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::operator_delete_array));
 	import::CSystemProperties__readFromFile__Ptr import::CSystemProperties__readFromFile = reinterpret_cast<import::CSystemProperties__readFromFile__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CSystemProperties__readFromFile));
 	import::CSystemProperties__writeToFile__Ptr import::CSystemProperties__writeToFile = reinterpret_cast<import::CSystemProperties__writeToFile__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CSystemProperties__writeToFile));
+	import::CSystemMgr___evtGameOptionFormBeforeShow__Ptr import::CSystemMgr___evtGameOptionFormBeforeShow = reinterpret_cast<import::CSystemMgr___evtGameOptionFormBeforeShow__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CSystemMgr___evtGameOptionFormBeforeShow));
+	import::CSystemMgr___evtGameOptionFormMouseDown__Ptr import::CSystemMgr___evtGameOptionFormMouseDown = reinterpret_cast<import::CSystemMgr___evtGameOptionFormMouseDown__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CSystemMgr___evtGameOptionFormMouseDown));
+	import::CUIInterface___FindForm__Ptr import::CUIInterface___FindForm = reinterpret_cast<import::CUIInterface___FindForm__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CUIInterface___FindForm));
+	import::CForm__Find__Ptr import::CForm__Find = reinterpret_cast<import::CForm__Find__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CForm__Find));
+	import::CCheckGroup__SetActiveIndex__Ptr import::CCheckGroup__SetActiveIndex = reinterpret_cast<import::CCheckGroup__SetActiveIndex__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CCheckGroup__SetActiveIndex));
+
 }

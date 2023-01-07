@@ -15,6 +15,8 @@
 #include "Render.h"
 #include "TextLabel.h"
 #include "GuiPic.h"
+#include "UIInterface.h"
+#include "Form.h"
 
 #include "Loot.h"
 
@@ -60,6 +62,8 @@ void Start(const char* path)
     DetourAttach(&(PVOID&)pkodev::import::NetActorDestroy, pkodev::hook::NetActorDestroy);
     DetourAttach(&(PVOID&)pkodev::import::CSystemProperties__readFromFile, pkodev::hook::CSystemProperties__readFromFile);
     DetourAttach(&(PVOID&)pkodev::import::CSystemProperties__writeToFile, pkodev::hook::CSystemProperties__writeToFile);
+    DetourAttach(&(PVOID&)pkodev::import::CSystemMgr___evtGameOptionFormBeforeShow, pkodev::hook::CSystemMgr___evtGameOptionFormBeforeShow);
+    DetourAttach(&(PVOID&)pkodev::import::CSystemMgr___evtGameOptionFormMouseDown, pkodev::hook::CSystemMgr___evtGameOptionFormMouseDown);
     DetourTransactionCommit();
 }
 
@@ -72,6 +76,8 @@ void Stop()
     DetourDetach(&(PVOID&)pkodev::import::NetActorDestroy, pkodev::hook::NetActorDestroy);
     DetourDetach(&(PVOID&)pkodev::import::CSystemProperties__readFromFile, pkodev::hook::CSystemProperties__readFromFile);
     DetourDetach(&(PVOID&)pkodev::import::CSystemProperties__writeToFile, pkodev::hook::CSystemProperties__writeToFile);
+    DetourDetach(&(PVOID&)pkodev::import::CSystemMgr___evtGameOptionFormBeforeShow, pkodev::hook::CSystemMgr___evtGameOptionFormBeforeShow);
+    DetourDetach(&(PVOID&)pkodev::import::CSystemMgr___evtGameOptionFormMouseDown, pkodev::hook::CSystemMgr___evtGameOptionFormMouseDown);
     DetourTransactionCommit();
 }
 
@@ -209,6 +215,7 @@ int __fastcall pkodev::hook::CSystemProperties__readFromFile(void* This,
     void*, const char* szIniFileName)
 {
     const int ret = import::CSystemProperties__readFromFile(This, szIniFileName);
+
     if (ret == 0) {
         const int DEFAULT_NUM = -2;
         const int num = GetPrivateProfileIntA("gameOption", "dropInfo", DEFAULT_NUM, szIniFileName);
@@ -224,6 +231,7 @@ int __fastcall pkodev::hook::CSystemProperties__writeToFile(void* This,
     void*, const char* szIniFileName)
 {
     const int ret = import::CSystemProperties__writeToFile(This, szIniFileName);
+
     if (ret == 0) {
         char szBuf[8]{ 0x00 };
         sprintf_s(szBuf, sizeof(szBuf), "%d", ( (g_ShowDrop == true) ? 1 : 0) );
@@ -233,6 +241,50 @@ int __fastcall pkodev::hook::CSystemProperties__writeToFile(void* This,
     }
 
     return ret;
+}
+
+// void CSystemMgr::_evtGameOptionFormBeforeShow(CForm* pForm, bool& IsShow)
+void __cdecl pkodev::hook::CSystemMgr___evtGameOptionFormBeforeShow(void* pForm,
+    bool& IsShow)
+{
+    import::CSystemMgr___evtGameOptionFormBeforeShow(pForm, IsShow);
+
+    gui::CForm* frmGame = gui::CUIInterface::Instance().FindForm("frmGame");
+    if (frmGame != nullptr) {
+        void* cbxDropInfo = frmGame->Find("cbxDropInfo");
+        if (cbxDropInfo != nullptr) {
+            import::CCheckGroup__SetActiveIndex(cbxDropInfo, ( (g_ShowDrop == false) ? 0 : 1) );
+        }
+    }
+}
+
+// void CSystemMgr::_evtGameOptionFormMouseDown(CCompent *pSender, int nMsgType, int x, int y, DWORD dwKey)
+void __cdecl pkodev::hook::CSystemMgr___evtGameOptionFormMouseDown(void* pSender,
+    int nMsgType, int x, int y, DWORD dwKey)
+{
+    auto ExtractString = [](void* std__string) -> std::string 
+    {
+        if (Utils::Get<unsigned int, 0x28>(std__string) < 16u) {
+            return std::string(reinterpret_cast<const char *>(
+                reinterpret_cast<unsigned int>(std__string) + 0x14));
+        }
+
+        return std::string(*reinterpret_cast<const char**>(
+                reinterpret_cast<unsigned int>(std__string) + 0x14));
+    };
+
+    if ( ExtractString(pSender) == "btnYes" ) {
+        gui::CForm* frmGame = gui::CUIInterface::Instance().FindForm("frmGame");
+        if (frmGame != nullptr) {
+            void* cbxDropInfo = frmGame->Find("cbxDropInfo");
+            if (cbxDropInfo != nullptr) {
+                const int idx = Utils::Get<int, 0xBC>(cbxDropInfo);
+                g_ShowDrop = ( (idx == 0) ? false : true );
+            }
+        }
+    }
+
+    pkodev::import::CSystemMgr___evtGameOptionFormMouseDown(pSender, nMsgType, x, y, dwKey);
 }
 
 float GetDropRate(const std::string& path)

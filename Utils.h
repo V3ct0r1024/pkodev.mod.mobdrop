@@ -16,7 +16,7 @@ namespace pkodev {
 	template <typename T, int Offset>
 	T Utils::Get(void* ptr)
 	{
-		return *reinterpret_cast<T*>( reinterpret_cast<int>(ptr) + Offset );
+		return *reinterpret_cast<T*>(reinterpret_cast<unsigned int>(ptr) + Offset);
 	}
 
 	template <typename T, int Offset>

@@ -18,6 +18,12 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="Loot.cpp" />
+    <ClCompile Include="UIInterface.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Form.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextLabel.h">
@@ -45,6 +51,12 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Loot.h" />
+    <ClInclude Include="UIInterface.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Form.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GUI">

@@ -1,5 +1,8 @@
 #pragma once
+#include <Windows.h>
 #include "structure.h"
+#include "UIInterface.h"
+#include "Form.h"
 
 namespace pkodev {
 
@@ -67,6 +70,25 @@ namespace pkodev {
 			typedef int(__thiscall* CSystemProperties__writeToFile__Ptr)(void*, const char*);
 			static CSystemProperties__writeToFile__Ptr CSystemProperties__writeToFile;
 
+			// void CSystemMgr::_evtGameOptionFormBeforeShow(CForm* pForm, bool& IsShow)
+			typedef void(__cdecl* CSystemMgr___evtGameOptionFormBeforeShow__Ptr)(void*, bool&);
+			static CSystemMgr___evtGameOptionFormBeforeShow__Ptr CSystemMgr___evtGameOptionFormBeforeShow;
+
+			// void CSystemMgr::_evtGameOptionFormMouseDown(CCompent *pSender, int nMsgType, int x, int y, DWORD dwKey)
+			typedef void(__cdecl* CSystemMgr___evtGameOptionFormMouseDown__Ptr)(void*, int, int, int, DWORD);
+			static CSystemMgr___evtGameOptionFormMouseDown__Ptr CSystemMgr___evtGameOptionFormMouseDown;
+	
+			// CForm* CUIInterface::_FindForm(const char * frmName)
+			typedef gui::CForm* (__thiscall* CUIInterface___FindForm__Ptr)(void*, const char*);
+			static CUIInterface___FindForm__Ptr CUIInterface___FindForm;
+
+			// CCompent* CForm::Find(const char* str )
+			typedef void* (__thiscall* CForm__Find__Ptr)(void*, const char*);
+			static CForm__Find__Ptr CForm__Find;
+
+			// void CCheckGroup::SetActiveIndex(int n)  
+			typedef void (__thiscall* CCheckGroup__SetActiveIndex__Ptr)(void*, int);
+			static CCheckGroup__SetActiveIndex__Ptr CCheckGroup__SetActiveIndex;
 	};
 
 }

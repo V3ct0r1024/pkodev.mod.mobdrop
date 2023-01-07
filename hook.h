@@ -18,4 +18,10 @@ namespace pkodev { namespace hook {
 	// int CSystemProperties::writeToFile(const char * szIniFileName)
 	int __fastcall CSystemProperties__writeToFile(void* This, void*, const char* szIniFileName);
 
+	// void CSystemMgr::_evtGameOptionFormBeforeShow(CForm* pForm, bool& IsShow)
+	void __cdecl CSystemMgr___evtGameOptionFormBeforeShow(void* pForm, bool& IsShow);
+
+	// void CSystemMgr::_evtGameOptionFormMouseDown(CCompent *pSender, int nMsgType, int x, int y, DWORD dwKey)
+	void __cdecl CSystemMgr___evtGameOptionFormMouseDown(void* pSender, int nMsgType, int x, int y, DWORD dwKey);
+
 }}

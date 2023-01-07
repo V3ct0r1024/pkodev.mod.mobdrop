@@ -67,6 +67,24 @@ namespace pkodev {  namespace address {
 
             // int CSystemProperties::writeToFile(const char * szIniFileName)
             const unsigned int CSystemProperties__writeToFile = 0x00484C80;
+
+            // void CSystemMgr::_evtGameOptionFormBeforeShow(CForm* pForm, bool& IsShow)
+            const unsigned int CSystemMgr___evtGameOptionFormBeforeShow = 0x00484820;
+
+            // void CSystemMgr::_evtGameOptionFormMouseDown(CCompent *pSender, int nMsgType, int x, int y, DWORD dwKey)
+            const unsigned int CSystemMgr___evtGameOptionFormMouseDown = 0x00486030;
+
+            // CUIInterface
+            const unsigned int CUIInterface = 0x0066A288;
+
+            // CForm* CUIInterface::_FindForm(const char * frmName)
+            const unsigned int CUIInterface___FindForm = 0x0049E390;
+
+            // CCompent* CForm::Find(const char* str )
+            const unsigned int CForm__Find = 0x00494040;
+
+            // void CCheckGroup::SetActiveIndex(int n)  
+            const unsigned int CCheckGroup__SetActiveIndex = 0x00426A50;
         }
 
         // Game.exe 1 (1243412597)
@@ -134,6 +152,24 @@ namespace pkodev {  namespace address {
 
             // int CSystemProperties::writeToFile(const char * szIniFileName)
             const unsigned int CSystemProperties__writeToFile = 0x00484D40;
+
+            // void CSystemMgr::_evtGameOptionFormBeforeShow(CForm* pForm, bool& IsShow)
+            const unsigned int CSystemMgr___evtGameOptionFormBeforeShow = 0x004848E0;
+
+            // void CSystemMgr::_evtGameOptionFormMouseDown(CCompent *pSender, int nMsgType, int x, int y, DWORD dwKey)
+            const unsigned int CSystemMgr___evtGameOptionFormMouseDown = 0x004860F0;
+
+            // CUIInterface
+            const unsigned int CUIInterface = 0x0066A288;
+
+            // CForm* CUIInterface::_FindForm(const char * frmName)
+            const unsigned int CUIInterface___FindForm = 0x0049E4A0;
+
+            // CCompent* CForm::Find(const char* str)
+            const unsigned int CForm__Find = 0x00494150;
+
+            // void CCheckGroup::SetActiveIndex(int n)  
+            const unsigned int CCheckGroup__SetActiveIndex = 0x00426A50;
         }
 
         // Game.exe 2 (1252912474)
@@ -201,6 +237,24 @@ namespace pkodev {  namespace address {
 
             // int CSystemProperties::writeToFile(const char * szIniFileName)
             const unsigned int CSystemProperties__writeToFile = 0x00484DE0;
+
+            // void CSystemMgr::_evtGameOptionFormBeforeShow(CForm* pForm, bool& IsShow)
+            const unsigned int CSystemMgr___evtGameOptionFormBeforeShow = 0x00484980;
+
+            // void CSystemMgr::_evtGameOptionFormMouseDown(CCompent *pSender, int nMsgType, int x, int y, DWORD dwKey)
+            const unsigned int CSystemMgr___evtGameOptionFormMouseDown = 0x00486190;
+
+            // CUIInterface
+            const unsigned int CUIInterface = 0x0066A288;
+
+            // CForm* CUIInterface::_FindForm(const char * frmName)
+            const unsigned int CUIInterface___FindForm = 0x0049E540;
+
+            // CCompent* CForm::Find(const char* str )
+            const unsigned int CForm__Find = 0x004941F0;
+
+            // void CCheckGroup::SetActiveIndex(int n)  
+            const unsigned int CCheckGroup__SetActiveIndex = 0x00426A50;
         }
 
         // Game.exe 3 (1244511158)
@@ -268,6 +322,24 @@ namespace pkodev {  namespace address {
 
             // int CSystemProperties::writeToFile(const char * szIniFileName)
             const unsigned int CSystemProperties__writeToFile = 0x00484DD0;
+
+            // void CSystemMgr::_evtGameOptionFormBeforeShow(CForm* pForm, bool& IsShow)
+            const unsigned int CSystemMgr___evtGameOptionFormBeforeShow = 0x00484970;
+
+            // void CSystemMgr::_evtGameOptionFormMouseDown(CCompent *pSender, int nMsgType, int x, int y, DWORD dwKey)
+            const unsigned int CSystemMgr___evtGameOptionFormMouseDown = 0x00486180;
+
+            // CUIInterface
+            const unsigned int CUIInterface = 0x0066A288;
+
+            // CForm* CUIInterface::_FindForm(const char * frmName)
+            const unsigned int CUIInterface___FindForm = 0x0049E530;
+
+            // CCompent* CForm::Find(const char* str )
+            const unsigned int CForm__Find = 0x004941E0;
+
+            // void CCheckGroup::SetActiveIndex(int n)  
+            const unsigned int CCheckGroup__SetActiveIndex = 0x00426A50;
         }
 
         // Game.exe 4 (1585009030)
@@ -335,6 +407,24 @@ namespace pkodev {  namespace address {
 
             // int CSystemProperties::writeToFile(const char * szIniFileName)
             const unsigned int CSystemProperties__writeToFile = 0x00484F50;
+
+            // void CSystemMgr::_evtGameOptionFormBeforeShow(CForm* pForm, bool& IsShow)
+            const unsigned int CSystemMgr___evtGameOptionFormBeforeShow = 0x00484AF0;
+
+            // void CSystemMgr::_evtGameOptionFormMouseDown(CCompent *pSender, int nMsgType, int x, int y, DWORD dwKey)
+            const unsigned int CSystemMgr___evtGameOptionFormMouseDown = 0x00486300;
+
+            // CUIInterface
+            const unsigned int CUIInterface = 0x0066A2A0;
+
+            // CForm* CUIInterface::_FindForm(const char * frmName)
+            const unsigned int CUIInterface___FindForm = 0x0049E740;
+
+            // CCompent* CForm::Find(const char* str )
+            const unsigned int CForm__Find = 0x004943F0;
+
+            // void CCheckGroup::SetActiveIndex(int n)  
+            const unsigned int CCheckGroup__SetActiveIndex = 0x00426B80;
         }
 
         // Game.exe 5 (1207214236)
@@ -402,6 +492,24 @@ namespace pkodev {  namespace address {
 
             // int CSystemProperties::writeToFile(const char * szIniFileName)
             const unsigned int CSystemProperties__writeToFile = 0x00484950;
+
+            // void CSystemMgr::_evtGameOptionFormBeforeShow(CForm* pForm, bool& IsShow)
+            const unsigned int CSystemMgr___evtGameOptionFormBeforeShow = 0x004844F0;
+
+            // void CSystemMgr::_evtGameOptionFormMouseDown(CCompent *pSender, int nMsgType, int x, int y, DWORD dwKey)
+            const unsigned int CSystemMgr___evtGameOptionFormMouseDown = 0x00485D00;
+
+            // CUIInterface
+            const unsigned int CUIInterface = 0x0066A290;
+
+            // CForm* CUIInterface::_FindForm(const char * frmName)
+            const unsigned int CUIInterface___FindForm = 0x0049E190;
+
+            // CCompent* CForm::Find(const char* str )
+            const unsigned int CForm__Find = 0x00493E40;
+
+            // void CCheckGroup::SetActiveIndex(int n)  
+            const unsigned int CCheckGroup__SetActiveIndex = 0x00426A40;
         }
     
 }}

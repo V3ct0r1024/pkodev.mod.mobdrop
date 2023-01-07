@@ -503,16 +503,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Form.cpp" />
     <ClCompile Include="GuiPic.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="TextLabel.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="import.cpp" />
     <ClCompile Include="Loot.cpp" />
+    <ClCompile Include="UIInterface.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="address.h" />
+    <ClInclude Include="Form.h" />
     <ClInclude Include="GuiPic.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="TextLabel.h" />
@@ -520,6 +523,7 @@
     <ClInclude Include="import.h" />
     <ClInclude Include="Loot.h" />
     <ClInclude Include="structure.h" />
+    <ClInclude Include="UIInterface.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
