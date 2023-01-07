@@ -1,0 +1,48 @@
+-- File: Client\scripts\lua\forms\system.clu
+-- Add the following scripts somewhere after creating the 'frmGame' form
+--     and declaring a variable with the same name
+--
+-- For example, after lines:
+-- Line ~461: cbxHelpmodel = UI_CreateCompent( frmGame, CHECK_GROUP_TYPE, "cbxHelpmodel", 0, 0, 0, 0 )
+-- Line ~462: UI_AddGroupBox( cbxHelpmodel, chkHelpmodel1 )
+-- Line ~463: UI_AddGroupBox( cbxHelpmodel, chkHelpmodel2 )
+
+
+----------------------------------------------------------------------------------------------------
+-- Show drop settings
+----------------------------------------------------------------------------------------------------
+
+-- Label: "Show drop"
+labDropInfo = UI_CreateCompent(frmGame, LABELEX_TYPE, "labDropInfo", 30, 10, 12, 106)
+UI_SetCaption(labDropInfo, "Show drop")
+UI_SetTextColor(labDropInfo, COLOR_BLACK)
+UI_SetLabelExFont(labDropInfo, DEFAULT_FONT, TRUE, COLOR_WHITE)
+
+-- Label: "Off"
+labDropInfoOff = UI_CreateCompent(frmGame, LABELEX_TYPE, "labDropInfoOff", 30, 10, 70, 106)
+UI_SetCaption( labDropInfoOff, "Off")
+UI_SetTextColor(labDropInfoOff, COLOR_BLACK)
+UI_SetLabelExFont(labDropInfoOff, DEFAULT_FONT, TRUE, COLOR_WHITE)
+
+-- Label: "On"
+labDropInfoOn = UI_CreateCompent(frmGame, LABELEX_TYPE, "labDropInfoOn", 30, 10, 115, 106)
+UI_SetCaption(labDropInfoOn, "On")
+UI_SetTextColor(labDropInfoOn, COLOR_BLACK)
+UI_SetLabelExFont(labDropInfoOn, DEFAULT_FONT, TRUE, COLOR_WHITE)
+
+-- Checkbox: "Off"
+chkDropInfoOff = UI_CreateCompent(frmGame, CHECK_TYPE, "chkDropInfoOff", 10, 10, 102, 106)
+UI_LoadImage(chkDropInfoOff, "texture/ui/QQ2.tga", UNCHECKED, 10, 10, 40, 231)
+UI_LoadImage(chkDropInfoOff, "texture/ui/QQ2.tga", CHECKED, 10, 10, 52, 231)
+
+-- Checkbox: "On"
+chkDropInfoOn = UI_CreateCompent(frmGame, CHECK_TYPE, "chkDropInfoOn", 10, 10, 147, 106)
+UI_LoadImage(chkDropInfoOn, "texture/ui/QQ2.tga", UNCHECKED, 10, 10, 40, 231)
+UI_LoadImage(chkDropInfoOn, "texture/ui/QQ2.tga", CHECKED, 10, 10, 52, 231)
+
+-- Checkbox group
+cbxDropInfo = UI_CreateCompent(frmGame, CHECK_GROUP_TYPE, "cbxDropInfo", 0, 0, 0, 0 )
+UI_AddGroupBox(cbxDropInfo, chkDropInfoOff)
+UI_AddGroupBox(cbxDropInfo, chkDropInfoOn)
+
+----------------------------------------------------------------------------------------------------
