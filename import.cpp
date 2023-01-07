@@ -16,5 +16,6 @@ namespace pkodev {
 	import::NetActorDestroy__Ptr import::NetActorDestroy = reinterpret_cast<import::NetActorDestroy__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::NetActorDestroy));
 	import::CGameScene__SearchByID__Ptr import::CGameScene__SearchByID = reinterpret_cast<import::CGameScene__SearchByID__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CGameScene__SearchByID));
 	import::operator_delete_array_Ptr import::operator_delete_array = reinterpret_cast<import::operator_delete_array_Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::operator_delete_array));
-
+	import::CSystemProperties__readFromFile__Ptr import::CSystemProperties__readFromFile = reinterpret_cast<import::CSystemProperties__readFromFile__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CSystemProperties__readFromFile));
+	import::CSystemProperties__writeToFile__Ptr import::CSystemProperties__writeToFile = reinterpret_cast<import::CSystemProperties__writeToFile__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CSystemProperties__writeToFile));
 }

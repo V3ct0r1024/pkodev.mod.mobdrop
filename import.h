@@ -59,6 +59,14 @@ namespace pkodev {
 			typedef int (__cdecl* operator_delete_array_Ptr)(void*);
 			static operator_delete_array_Ptr operator_delete_array;
 
+			// int CSystemProperties::readFromFile(const char * szIniFileName)
+			typedef int(__thiscall* CSystemProperties__readFromFile__Ptr)(void*, const char*);
+			static CSystemProperties__readFromFile__Ptr CSystemProperties__readFromFile;
+
+			// int CSystemProperties::writeToFile(const char * szIniFileName)
+			typedef int(__thiscall* CSystemProperties__writeToFile__Ptr)(void*, const char*);
+			static CSystemProperties__writeToFile__Ptr CSystemProperties__writeToFile;
+
 	};
 
 }

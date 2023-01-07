@@ -61,6 +61,12 @@ namespace pkodev {  namespace address {
 
             // void operator delete[](void *p)
             const unsigned int operator_delete_array = 0x005B48C0;
+
+            // int CSystemProperties::readFromFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__readFromFile = 0x00484AD0;
+
+            // int CSystemProperties::writeToFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__writeToFile = 0x00484C80;
         }
 
         // Game.exe 1 (1243412597)
@@ -122,6 +128,12 @@ namespace pkodev {  namespace address {
 
             // void operator delete[](void *p)
             const unsigned int operator_delete_array = 0x005B4A00;
+
+            // int CSystemProperties::readFromFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__readFromFile = 0x00484B90;
+
+            // int CSystemProperties::writeToFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__writeToFile = 0x00484D40;
         }
 
         // Game.exe 2 (1252912474)
@@ -183,6 +195,12 @@ namespace pkodev {  namespace address {
 
             // void operator delete[](void *p)
             const unsigned int operator_delete_array = 0x005B4AC0;
+
+            // int CSystemProperties::readFromFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__readFromFile = 0x00484C30;
+
+            // int CSystemProperties::writeToFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__writeToFile = 0x00484DE0;
         }
 
         // Game.exe 3 (1244511158)
@@ -244,6 +262,12 @@ namespace pkodev {  namespace address {
 
             // void operator delete[](void *p)
             const unsigned int operator_delete_array = 0x005B4AC0;
+
+            // int CSystemProperties::readFromFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__readFromFile = 0x00484C20;
+
+            // int CSystemProperties::writeToFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__writeToFile = 0x00484DD0;
         }
 
         // Game.exe 4 (1585009030)
@@ -305,6 +329,12 @@ namespace pkodev {  namespace address {
 
             // void operator delete[](void *p)
             const unsigned int operator_delete_array = 0x005B4E20;
+
+            // int CSystemProperties::readFromFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__readFromFile = 0x00484DA0;
+
+            // int CSystemProperties::writeToFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__writeToFile = 0x00484F50;
         }
 
         // Game.exe 5 (1207214236)
@@ -366,6 +396,12 @@ namespace pkodev {  namespace address {
 
             // void operator delete[](void *p)
             const unsigned int operator_delete_array = 0x005B4740;
+
+            // int CSystemProperties::readFromFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__readFromFile = 0x004847A0;
+
+            // int CSystemProperties::writeToFile(const char * szIniFileName)
+            const unsigned int CSystemProperties__writeToFile = 0x00484950;
         }
     
 }}

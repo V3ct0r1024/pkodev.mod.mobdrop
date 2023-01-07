@@ -21,14 +21,14 @@
 
 const unsigned int MAX_NAME_LEN = 24;
 
-pkodev::Loot loot;
-float drop_rate = 1.0f;
+pkodev::Loot g_Loot;
+float g_DropRate = 1.0f;
+bool g_ShowDrop = false;
 
 
 float GetDropRate(const std::string& path);
 
 
-// Entry point
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
@@ -37,7 +37,6 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     return TRUE;
 }
 
-// Get mod information
 void GetModInformation(mod_info& info)
 {
     strcpy_s(info.name, TOSTRING(MOD_NAME));
@@ -46,13 +45,12 @@ void GetModInformation(mod_info& info)
     info.exe_version = MOD_EXE_VERSION;
 }
 
-// Start the mod
 void Start(const char* path)
 {
     char cfg_path[MAX_PATH]{ 0x00 };
     sprintf_s(cfg_path, sizeof(cfg_path), "%s\\%s.cfg", path, TOSTRING(MOD_NAME));
 
-    drop_rate = GetDropRate(cfg_path);
+    g_DropRate = GetDropRate(cfg_path);
 
     DetourRestoreAfterWith();
     DetourTransactionBegin();
@@ -60,10 +58,11 @@ void Start(const char* path)
     DetourAttach(&(PVOID&)pkodev::import::CHeadSay__Render, pkodev::hook::CHeadSay__Render);
     DetourAttach(&(PVOID&)pkodev::import::stNetActorCreate__CreateCha, pkodev::hook::stNetActorCreate__CreateCha);
     DetourAttach(&(PVOID&)pkodev::import::NetActorDestroy, pkodev::hook::NetActorDestroy);
+    DetourAttach(&(PVOID&)pkodev::import::CSystemProperties__readFromFile, pkodev::hook::CSystemProperties__readFromFile);
+    DetourAttach(&(PVOID&)pkodev::import::CSystemProperties__writeToFile, pkodev::hook::CSystemProperties__writeToFile);
     DetourTransactionCommit();
 }
 
-// Stop the mod
 void Stop()
 {
     DetourTransactionBegin();
@@ -71,6 +70,8 @@ void Stop()
     DetourDetach(&(PVOID&)pkodev::import::CHeadSay__Render, pkodev::hook::CHeadSay__Render);
     DetourDetach(&(PVOID&)pkodev::import::stNetActorCreate__CreateCha, pkodev::hook::stNetActorCreate__CreateCha);
     DetourDetach(&(PVOID&)pkodev::import::NetActorDestroy, pkodev::hook::NetActorDestroy);
+    DetourDetach(&(PVOID&)pkodev::import::CSystemProperties__readFromFile, pkodev::hook::CSystemProperties__readFromFile);
+    DetourDetach(&(PVOID&)pkodev::import::CSystemProperties__writeToFile, pkodev::hook::CSystemProperties__writeToFile);
     DetourTransactionCommit();
 }
 
@@ -80,7 +81,7 @@ void __fastcall pkodev::hook::CHeadSay__Render(void* This,
 {
     const bool ShowName = Utils::Get<bool, 0x49>(This);
 
-    if (ShowName == false) {
+    if ( (g_ShowDrop == false) || (ShowName == false) ) {
         import::CHeadSay__Render(This, Pos);
         return;
     }
@@ -93,9 +94,9 @@ void __fastcall pkodev::hook::CHeadSay__Render(void* This,
         return;
     }
 
-    const auto it = loot.find(OtherCha->Info->id);
+    const auto it = g_Loot.find(OtherCha->Info->id);
 
-    if ( (it == loot.end()) || (it->second.loot.empty() == true) ) {
+    if ( (it == g_Loot.end()) || (it->second.loot.empty() == true) ) {
         import::CHeadSay__Render(This, Pos);
         return;
     }
@@ -145,9 +146,9 @@ pkodev::stCharacter* __fastcall pkodev::hook::stNetActorCreate__CreateCha(
         return const_cast<stCharacter*>(Cha);
     }
 
-    const auto it = loot.find(Cha->Info->id);
+    const auto it = g_Loot.find(Cha->Info->id);
 
-    if (it != loot.end()) {
+    if (it != g_Loot.end()) {
         ++(it->second.counter);
         return const_cast<stCharacter*>(Cha);
     }
@@ -171,7 +172,7 @@ pkodev::stCharacter* __fastcall pkodev::hook::stNetActorCreate__CreateCha(
             item.icon.Load(gui::CGuiPic::GetIconFile("error"), 32, 32, 0.5f, 0.5f);
         }
 
-        item.chance = Cha->Info->items[i].Chance(drop_rate);
+        item.chance = Cha->Info->items[i].Chance(g_DropRate);
 
         items.loot.push_back(std::move(item));
     }
@@ -181,7 +182,7 @@ pkodev::stCharacter* __fastcall pkodev::hook::stNetActorCreate__CreateCha(
     std::sort( items.loot.begin(), items.loot.end(), 
         [](const auto& a, const auto& b) -> bool { return (a.chance > b.chance); } );
     
-    loot.insert({ Cha->Info->id, std::move(items) });
+    g_Loot.insert({ Cha->Info->id, std::move(items) });
 
     return const_cast<stCharacter*>(Cha);
 }
@@ -194,13 +195,44 @@ void __cdecl pkodev::hook::NetActorDestroy(unsigned int nID, char chSeeType)
 
     if ( (chSeeType == 0) && (Cha != nullptr) && (Cha->IsMonster() == true) )
     {
-        const auto it = loot.find(Cha->Info->id);
-        if ( ( it != loot.end() ) && ( --(it->second.counter) == 0) ) {
-            loot.erase(it);
+        const auto it = g_Loot.find(Cha->Info->id);
+        if ( ( it != g_Loot.end() ) && ( --(it->second.counter) == 0) ) {
+            g_Loot.erase(it);
         }
     }
 
     import::NetActorDestroy(nID, chSeeType);
+}
+
+// int CSystemProperties::readFromFile(const char * szIniFileName)
+int __fastcall pkodev::hook::CSystemProperties__readFromFile(void* This,
+    void*, const char* szIniFileName)
+{
+    const int ret = import::CSystemProperties__readFromFile(This, szIniFileName);
+    if (ret == 0) {
+        const int DEFAULT_NUM = -2;
+        const int num = GetPrivateProfileIntA("gameOption", "dropInfo", DEFAULT_NUM, szIniFileName);
+        if (num == DEFAULT_NUM) { return DEFAULT_NUM; }
+        g_ShowDrop = ( (num == 0) ? false : true );
+    }
+
+    return ret;
+}
+
+// int CSystemProperties::writeToFile(const char * szIniFileName)
+int __fastcall pkodev::hook::CSystemProperties__writeToFile(void* This,
+    void*, const char* szIniFileName)
+{
+    const int ret = import::CSystemProperties__writeToFile(This, szIniFileName);
+    if (ret == 0) {
+        char szBuf[8]{ 0x00 };
+        sprintf_s(szBuf, sizeof(szBuf), "%d", ( (g_ShowDrop == true) ? 1 : 0) );
+        if (WritePrivateProfileStringA("gameOption", "dropInfo", szBuf, szIniFileName) == false) {
+            return -1;
+        }
+    }
+
+    return ret;
 }
 
 float GetDropRate(const std::string& path)
