@@ -50,9 +50,14 @@ namespace pkodev {
 	};
 
 	struct stCharacter final {
-		const char nop0[0x0414];
+		const char nop0[0x1F8];
+		const float x;
+		const float y;
+		const char nop1[0x0104];
+		const float z;
+		const char nop2[0x010C];
 		const ChaRecord* Info;
-		const char nop1[0x08C0];
+		const char nop3[0x08C0];
 		const int type;
 
 		bool IsMonster() const {

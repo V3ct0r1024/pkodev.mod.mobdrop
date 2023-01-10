@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
 #include <fstream>
 #include <unordered_map>
 #include <algorithm>
@@ -49,36 +51,53 @@ void GetModInformation(mod_info& info)
 
 void Start(const char* path)
 {
+    using namespace pkodev;
+
+    AllocConsole();
+    freopen("CONOUT$", "w", stdout);
+    freopen("CONOUT$", "w", stderr);
+    std::cout << TOSTRING(MOD_NAME) << std::endl;
+
     char cfg_path[MAX_PATH]{ 0x00 };
     sprintf_s(cfg_path, sizeof(cfg_path), "%s\\%s.cfg", path, TOSTRING(MOD_NAME));
 
     g_DropRate = GetDropRate(cfg_path);
 
+    const char patch[] = { 0x6A , 0x00 };
+    Utils::Patch<address::MOD_EXE_VERSION::HitSelectCharacter__nSelect>(patch);
+
     DetourRestoreAfterWith();
     DetourTransactionBegin();
     DetourUpdateThread(GetCurrentThread());
-    DetourAttach(&(PVOID&)pkodev::import::CHeadSay__Render, pkodev::hook::CHeadSay__Render);
-    DetourAttach(&(PVOID&)pkodev::import::stNetActorCreate__CreateCha, pkodev::hook::stNetActorCreate__CreateCha);
-    DetourAttach(&(PVOID&)pkodev::import::NetActorDestroy, pkodev::hook::NetActorDestroy);
-    DetourAttach(&(PVOID&)pkodev::import::CSystemProperties__readFromFile, pkodev::hook::CSystemProperties__readFromFile);
-    DetourAttach(&(PVOID&)pkodev::import::CSystemProperties__writeToFile, pkodev::hook::CSystemProperties__writeToFile);
-    DetourAttach(&(PVOID&)pkodev::import::CSystemMgr___evtGameOptionFormBeforeShow, pkodev::hook::CSystemMgr___evtGameOptionFormBeforeShow);
-    DetourAttach(&(PVOID&)pkodev::import::CSystemMgr___evtGameOptionFormMouseDown, pkodev::hook::CSystemMgr___evtGameOptionFormMouseDown);
+    DetourAttach(&(PVOID&)import::CHeadSay__Render, hook::CHeadSay__Render);
+    DetourAttach(&(PVOID&)import::stNetActorCreate__CreateCha, hook::stNetActorCreate__CreateCha);
+    DetourAttach(&(PVOID&)import::NetActorDestroy, hook::NetActorDestroy);
+    DetourAttach(&(PVOID&)import::CSystemProperties__readFromFile, hook::CSystemProperties__readFromFile);
+    DetourAttach(&(PVOID&)import::CSystemProperties__writeToFile, hook::CSystemProperties__writeToFile);
+    DetourAttach(&(PVOID&)import::CSystemMgr___evtGameOptionFormBeforeShow, hook::CSystemMgr___evtGameOptionFormBeforeShow);
+    DetourAttach(&(PVOID&)import::CSystemMgr___evtGameOptionFormMouseDown, hook::CSystemMgr___evtGameOptionFormMouseDown);
+    DetourAttach(&(PVOID&)import::CStartMgr__PopMenu, hook::CStartMgr__PopMenu);
     DetourTransactionCommit();
 }
 
 void Stop()
 {
+    using namespace pkodev;
+
     DetourTransactionBegin();
     DetourUpdateThread(GetCurrentThread());
-    DetourDetach(&(PVOID&)pkodev::import::CHeadSay__Render, pkodev::hook::CHeadSay__Render);
-    DetourDetach(&(PVOID&)pkodev::import::stNetActorCreate__CreateCha, pkodev::hook::stNetActorCreate__CreateCha);
-    DetourDetach(&(PVOID&)pkodev::import::NetActorDestroy, pkodev::hook::NetActorDestroy);
-    DetourDetach(&(PVOID&)pkodev::import::CSystemProperties__readFromFile, pkodev::hook::CSystemProperties__readFromFile);
-    DetourDetach(&(PVOID&)pkodev::import::CSystemProperties__writeToFile, pkodev::hook::CSystemProperties__writeToFile);
-    DetourDetach(&(PVOID&)pkodev::import::CSystemMgr___evtGameOptionFormBeforeShow, pkodev::hook::CSystemMgr___evtGameOptionFormBeforeShow);
-    DetourDetach(&(PVOID&)pkodev::import::CSystemMgr___evtGameOptionFormMouseDown, pkodev::hook::CSystemMgr___evtGameOptionFormMouseDown);
+    DetourDetach(&(PVOID&)import::CHeadSay__Render, hook::CHeadSay__Render);
+    DetourDetach(&(PVOID&)import::stNetActorCreate__CreateCha, hook::stNetActorCreate__CreateCha);
+    DetourDetach(&(PVOID&)import::NetActorDestroy, hook::NetActorDestroy);
+    DetourDetach(&(PVOID&)import::CSystemProperties__readFromFile, hook::CSystemProperties__readFromFile);
+    DetourDetach(&(PVOID&)import::CSystemProperties__writeToFile, hook::CSystemProperties__writeToFile);
+    DetourDetach(&(PVOID&)import::CSystemMgr___evtGameOptionFormBeforeShow, hook::CSystemMgr___evtGameOptionFormBeforeShow);
+    DetourDetach(&(PVOID&)import::CSystemMgr___evtGameOptionFormMouseDown, hook::CSystemMgr___evtGameOptionFormMouseDown);
+    DetourDetach(&(PVOID&)import::CStartMgr__PopMenu, hook::CStartMgr__PopMenu);
     DetourTransactionCommit();
+
+    const char patch[] = { 0x6A , 0x02 };
+    Utils::Patch<address::MOD_EXE_VERSION::HitSelectCharacter__nSelect>(patch);
 }
 
 // void CHeadSay::Render(D3DXVECTOR3& pos)
@@ -285,6 +304,28 @@ void __cdecl pkodev::hook::CSystemMgr___evtGameOptionFormMouseDown(void* pSender
     }
 
     pkodev::import::CSystemMgr___evtGameOptionFormMouseDown(pSender, nMsgType, x, y, dwKey);
+}
+
+// void  CStartMgr::PopMenu(CCharacter* pCha)
+void __fastcall pkodev::hook::CStartMgr__PopMenu(void* This, void*, const stCharacter* pCha)
+{
+    if (pCha->IsMonster() == false) {
+        import::CStartMgr__PopMenu(This, pCha);
+        return;
+    }
+
+    static gui::CForm* pMain800 = gui::CUIInterface::Instance().FindForm("frmMain800");
+    if (pMain800 == nullptr) {
+        return;
+    }
+
+    static void* mobMouseRight = gui::CUIInterface::Instance().FindMenu("mobMouseRight");
+    if (mobMouseRight == nullptr) {
+        return;
+    }
+    
+    const Vector2D<int> screen = gui::CRender::WorldToScreen({ pCha->x, pCha->y, pCha->z });
+    pMain800->PopMenu(mobMouseRight, screen.x, screen.y);
 }
 
 float GetDropRate(const std::string& path)

@@ -23,5 +23,8 @@ namespace pkodev {
 	import::CUIInterface___FindForm__Ptr import::CUIInterface___FindForm = reinterpret_cast<import::CUIInterface___FindForm__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CUIInterface___FindForm));
 	import::CForm__Find__Ptr import::CForm__Find = reinterpret_cast<import::CForm__Find__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CForm__Find));
 	import::CCheckGroup__SetActiveIndex__Ptr import::CCheckGroup__SetActiveIndex = reinterpret_cast<import::CCheckGroup__SetActiveIndex__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CCheckGroup__SetActiveIndex));
+	import::CStartMgr__PopMenu__Ptr import::CStartMgr__PopMenu = reinterpret_cast<import::CStartMgr__PopMenu__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CStartMgr__PopMenu));
+	import::CForm__PopMenu__Ptr import::CForm__PopMenu = reinterpret_cast<import::CForm__PopMenu__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CForm__PopMenu));
+	import::CMenu__FindMenu__Ptr import::CMenu__FindMenu = reinterpret_cast<import::CMenu__FindMenu__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CMenu__FindMenu));
 
 }

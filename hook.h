@@ -24,4 +24,8 @@ namespace pkodev { namespace hook {
 	// void CSystemMgr::_evtGameOptionFormMouseDown(CCompent *pSender, int nMsgType, int x, int y, DWORD dwKey)
 	void __cdecl CSystemMgr___evtGameOptionFormMouseDown(void* pSender, int nMsgType, int x, int y, DWORD dwKey);
 
+	// void  CStartMgr::PopMenu(CCharacter* pCha)
+	void __fastcall CStartMgr__PopMenu(void* This, void*, const stCharacter* pCha);
+
+
 }}

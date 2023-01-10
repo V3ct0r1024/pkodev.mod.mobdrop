@@ -14,5 +14,9 @@ namespace pkodev { namespace gui {
 		return import::CForm__Find(this, name.c_str());
 	}
 
+	void CForm::PopMenu(void* menu, int x, int y)
+	{
+		return import::CForm__PopMenu(this, menu, x, y);
+	}
 
 } }

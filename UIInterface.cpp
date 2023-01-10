@@ -21,4 +21,9 @@ namespace pkodev { namespace gui {
 		return import::CUIInterface___FindForm(m_This, name.c_str());
 	}
 
+	void* CUIInterface::FindMenu(const std::string& name)
+	{
+		return import::CMenu__FindMenu(name.c_str());
+	}
+
 } }

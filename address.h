@@ -170,6 +170,23 @@ namespace pkodev {  namespace address {
 
             // void CCheckGroup::SetActiveIndex(int n)  
             const unsigned int CCheckGroup__SetActiveIndex = 0x00426A50;
+
+            // void  CStartMgr::PopMenu(CCharacter* pCha)
+            const unsigned int CStartMgr__PopMenu = 0x0047CEA0;
+
+            /* 
+                void CWorldScene::_FrameMove(DWORD dwTimeParam)
+                pCha = HitSelectCharacter( nMouseX, nMouseY, enumSC_PLAYER )
+                6A 00 | push 0
+            */
+            const unsigned int HitSelectCharacter__nSelect = 0x004CDA68;
+
+            // void CForm::PopMenu( CMenu* pMenu, int x, int y )
+            const unsigned int CForm__PopMenu = 0x00493690;
+
+            // static CMenu* CMenu::FindMenu(const char* name)
+            const unsigned int CMenu__FindMenu = 0x00499510;
+
         }
 
         // Game.exe 2 (1252912474)

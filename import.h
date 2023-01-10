@@ -89,6 +89,19 @@ namespace pkodev {
 			// void CCheckGroup::SetActiveIndex(int n)  
 			typedef void (__thiscall* CCheckGroup__SetActiveIndex__Ptr)(void*, int);
 			static CCheckGroup__SetActiveIndex__Ptr CCheckGroup__SetActiveIndex;
+
+			// void  CStartMgr::PopMenu(CCharacter* pCha)
+			typedef void(__thiscall* CStartMgr__PopMenu__Ptr)(void*, const stCharacter* pCha);
+			static CStartMgr__PopMenu__Ptr CStartMgr__PopMenu;
+				
+			// void CForm::PopMenu( CMenu* pMenu, int x, int y )
+			typedef void(__thiscall* CForm__PopMenu__Ptr)(gui::CForm*, void*, int, int);
+			static CForm__PopMenu__Ptr CForm__PopMenu;
+
+			// static CMenu* CMenu::FindMenu(const char* name)
+			typedef void*(__cdecl* CMenu__FindMenu__Ptr)(const char*);
+			static CMenu__FindMenu__Ptr CMenu__FindMenu;
+
 	};
 
 }

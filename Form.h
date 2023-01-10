@@ -9,6 +9,7 @@ namespace pkodev { namespace gui {
 			CForm(void* This = nullptr);
 			~CForm() = default;
 			void* Find(const std::string& name);
+			void PopMenu(void* menu, int x, int y);
 
 		private:
 			void* m_This;
