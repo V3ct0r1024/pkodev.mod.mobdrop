@@ -1,6 +1,5 @@
 #pragma once
 #include <Windows.h>
-#include <iostream>
 
 namespace pkodev {
 
@@ -13,6 +12,9 @@ namespace pkodev {
 
 			template <typename T, int Offset = 0x00>
 			static T Get(unsigned int address);
+
+			template <typename T, int Offset = 0x00>
+			static void Set(void* ptr, const T& value);
 
 			template <DWORD Address, typename T>
 			static bool Patch(const T& data);
@@ -30,11 +32,16 @@ namespace pkodev {
 		return Get<T, Offset>( reinterpret_cast<void*>(address) );
 	}
 
+	template <typename T, int Offset>
+	void Utils::Set(void* ptr, const T& value)
+	{
+		*reinterpret_cast<T*>(reinterpret_cast<unsigned int>(ptr) + Offset) = value;
+	}
+
 	template <DWORD Address, typename T>
 	bool Utils::Patch(const T& data)
 	{
 		DWORD access = PAGE_EXECUTE_READWRITE;
-		std::cout << sizeof(data) << std::endl;
 		if (VirtualProtect(reinterpret_cast<LPVOID>(Address), sizeof(data), access, &access) == FALSE) {
 			return false;
 		}

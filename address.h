@@ -184,9 +184,26 @@ namespace pkodev {  namespace address {
             // void CForm::PopMenu( CMenu* pMenu, int x, int y )
             const unsigned int CForm__PopMenu = 0x00493690;
 
+            // void CForm::Show()
+            const unsigned int CForm__Show = 0x004940E0;
+
             // static CMenu* CMenu::FindMenu(const char* name)
             const unsigned int CMenu__FindMenu = 0x00499510;
 
+            // inline void CItemRow::SetIndex(unsigned int v, CItemObj* p)
+            const unsigned int CItemRow__SetIndex = 0x0042B410;
+
+            // CItemRow* CListItems::NewItem()
+            const unsigned int CListItems__NewItem = 0x0042DE00;
+
+            // T* operator new(unsigned int size)
+            const unsigned int operator_new = 0x0059CAC8;
+
+            // CItemEx::CItemEx(const char* str, DWORD c)
+            const unsigned int CItemEx__CItemEx = 0x00446310;
+
+            // CItemCommand::CItemCommand(CItemRecord* pItem)
+            const unsigned int CItemCommand__CItemCommand = 0x004899A0;
         }
 
         // Game.exe 2 (1252912474)

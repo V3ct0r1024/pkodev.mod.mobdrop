@@ -24,6 +24,18 @@
     <ClCompile Include="Form.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ListView.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemObj.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextLabel.h">
@@ -55,6 +67,21 @@
       <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="Form.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FindMethodProxy.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Label.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ListView.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemObj.h">
       <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>

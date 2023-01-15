@@ -3,20 +3,18 @@
 
 namespace pkodev { namespace gui { 
 
-	CForm::CForm(void* This) :
-		m_This(This)
-	{
-
-	}
-
-	void* CForm::Find(const std::string& name)
-	{
-		return import::CForm__Find(this, name.c_str());
-	}
-
-	void CForm::PopMenu(void* menu, int x, int y)
+	void CForm::PopMenu(const CMenu* menu, int x, int y)
 	{
 		return import::CForm__PopMenu(this, menu, x, y);
 	}
+
+	void CForm::Show()
+	{
+		return import::CForm__Show(this);
+	}
+
+	void* CFindMethodProxy::Find(CForm* form, const char* name) {
+		return import::CForm__Find(form, name);
+	};
 
 } }

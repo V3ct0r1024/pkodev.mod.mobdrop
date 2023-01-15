@@ -1,8 +1,11 @@
 #pragma once
-#include <Windows.h>
 #include "structure.h"
 #include "UIInterface.h"
+
 #include "Form.h"
+#include "Menu.h"
+#include "ListView.h"
+#include "ItemObj.h"
 
 namespace pkodev {
 
@@ -75,7 +78,7 @@ namespace pkodev {
 			static CSystemMgr___evtGameOptionFormBeforeShow__Ptr CSystemMgr___evtGameOptionFormBeforeShow;
 
 			// void CSystemMgr::_evtGameOptionFormMouseDown(CCompent *pSender, int nMsgType, int x, int y, DWORD dwKey)
-			typedef void(__cdecl* CSystemMgr___evtGameOptionFormMouseDown__Ptr)(void*, int, int, int, DWORD);
+			typedef void(__cdecl* CSystemMgr___evtGameOptionFormMouseDown__Ptr)(void*, int, int, int, unsigned int);
 			static CSystemMgr___evtGameOptionFormMouseDown__Ptr CSystemMgr___evtGameOptionFormMouseDown;
 	
 			// CForm* CUIInterface::_FindForm(const char * frmName)
@@ -95,12 +98,36 @@ namespace pkodev {
 			static CStartMgr__PopMenu__Ptr CStartMgr__PopMenu;
 				
 			// void CForm::PopMenu( CMenu* pMenu, int x, int y )
-			typedef void(__thiscall* CForm__PopMenu__Ptr)(gui::CForm*, void*, int, int);
+			typedef void(__thiscall* CForm__PopMenu__Ptr)(gui::CForm*, const gui::CMenu* menu, int, int);
 			static CForm__PopMenu__Ptr CForm__PopMenu;
 
+			// void CForm::Show()
+			typedef void(__thiscall* CForm__Show__Ptr)(void*);
+			static CForm__Show__Ptr CForm__Show;
+
 			// static CMenu* CMenu::FindMenu(const char* name)
-			typedef void*(__cdecl* CMenu__FindMenu__Ptr)(const char*);
+			typedef gui::CMenu* (__cdecl* CMenu__FindMenu__Ptr)(const char*);
 			static CMenu__FindMenu__Ptr CMenu__FindMenu;
+
+			// inline void CItemRow::SetIndex(unsigned int v, CItemObj* p)
+			typedef void(__thiscall* CItemRow__SetIndex__Ptr)(void*, unsigned int, const gui::CItemObj*);
+			static CItemRow__SetIndex__Ptr CItemRow__SetIndex;
+			
+			// CItemRow* CListItems::NewItem()
+			typedef gui::CItemRow* (__thiscall* CListItems__NewItem__Ptr)(void*);
+			static CListItems__NewItem__Ptr CListItems__NewItem;
+
+			// T* operator new(unsigned int size)
+			typedef void* (__cdecl* operator_new__Ptr)(unsigned int);
+			static operator_new__Ptr operator_new;
+
+			// CItemEx::CItemEx(const char* str, DWORD c)
+			typedef void(__thiscall* CItemEx__CItemEx__Ptr)(void*, const char*, unsigned int);
+			static CItemEx__CItemEx__Ptr CItemEx__CItemEx;
+
+			// CItemCommand::CItemCommand(CItemRecord* pItem)
+			typedef void(__thiscall* CItemCommand__CItemCommand__Ptr)(void*, const ItemRecord* item);
+			static CItemCommand__CItemCommand__Ptr CItemCommand__CItemCommand;
 
 	};
 

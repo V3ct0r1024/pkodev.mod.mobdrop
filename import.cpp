@@ -25,6 +25,12 @@ namespace pkodev {
 	import::CCheckGroup__SetActiveIndex__Ptr import::CCheckGroup__SetActiveIndex = reinterpret_cast<import::CCheckGroup__SetActiveIndex__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CCheckGroup__SetActiveIndex));
 	import::CStartMgr__PopMenu__Ptr import::CStartMgr__PopMenu = reinterpret_cast<import::CStartMgr__PopMenu__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CStartMgr__PopMenu));
 	import::CForm__PopMenu__Ptr import::CForm__PopMenu = reinterpret_cast<import::CForm__PopMenu__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CForm__PopMenu));
+	import::CForm__Show__Ptr import::CForm__Show = reinterpret_cast<import::CForm__Show__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CForm__Show));
 	import::CMenu__FindMenu__Ptr import::CMenu__FindMenu = reinterpret_cast<import::CMenu__FindMenu__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CMenu__FindMenu));
+	import::CItemRow__SetIndex__Ptr import::CItemRow__SetIndex = reinterpret_cast<import::CItemRow__SetIndex__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CItemRow__SetIndex));
+	import::CListItems__NewItem__Ptr import::CListItems__NewItem = reinterpret_cast<import::CListItems__NewItem__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CListItems__NewItem));
+	import::operator_new__Ptr import::operator_new = reinterpret_cast<import::operator_new__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::operator_new));
+	import::CItemEx__CItemEx__Ptr import::CItemEx__CItemEx = reinterpret_cast<import::CItemEx__CItemEx__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CItemEx__CItemEx));
+	import::CItemCommand__CItemCommand__Ptr import::CItemCommand__CItemCommand = reinterpret_cast<import::CItemCommand__CItemCommand__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CItemCommand__CItemCommand));
 
 }

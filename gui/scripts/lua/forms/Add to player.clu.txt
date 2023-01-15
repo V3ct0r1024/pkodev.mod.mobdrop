@@ -1,0 +1,81 @@
+----------------------------------------------------------------------------------------------------
+-- pkodev.mod.mobdrop
+----------------------------------------------------------------------------------------------------
+-- File: Client\scripts\lua\forms\player.clu
+-- Add the following scripts somewhere after creating the 'mainMouseRight' control
+--     and declaring a variable with the same name
+--
+-- For example, after line:
+-- Line ~305: UI_MenuAddText( mainMouseRight, ...
+
+----------------------------------
+-- Monster popup menu
+----------------------------------
+mobMouseRight = UI_CreateCompent(frmMain800, MENU_TYPE, "mobMouseRight", 110, 97, 240, 468)
+UI_MenuLoadImage( mobMouseRight, TRUE, FALSE, "texture/ui/right.tga", 5, 5, 10, 10, "texture/ui/right.tga", 5, 5)
+UI_SetMargin(mobMouseRight, 10, 5, 5, 5)
+UI_MenuLoadSelect(mobMouseRight, "texture/ui/SystemBotton3.tga", 79, 13, 25, 227)
+UI_MenuAddText(mobMouseRight, "List of items")
+----------------------------------
+
+----------------------------------
+-- Monster drop list form (C) Graf (https://pkodev.net/profile/215-graf/)
+----------------------------------
+
+-- Form
+frmMobDrops = UI_CreateForm("frmMobDrops", FALSE, 255, 332, 0, 0, TRUE, TRUE)
+imgfrmMobDrops = UI_CreateCompent (frmMobDrops, IMAGE_TYPE, "imgfrmMobDrops", 255, 332, 0, 0)
+UI_LoadImage(imgfrmMobDrops, "texture/ui/pkodev.mod.drop/dropinfo.png", NORMAL, 255, 332, 0, 0)
+UI_SetIsDrag(frmMobDrops, TRUE)
+UI_AddFormToTemplete(frmMobDrops, FORM_MAIN)
+UI_SetFormStyle(frmMobDrops, FORM_ALLCENTER)
+UI_FormSetIsEscClose(frmMobDrops, TRUE)
+
+-- Title
+labTitle = UI_CreateCompent(frmMobDrops, LABELEX_TYPE, "labTitle", 400, 150, 8, 3)
+UI_SetCaption(labTitle, "List of items")
+UI_SetTextColor(labTitle, COLOR_BLACK)
+UI_SetLabelExFont(labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE)
+
+-- Close button
+btnClose = UI_CreateCompent(frmMobDrops, BUTTON_TYPE, "btnClose", 14, 14, 215, 2)
+UI_LoadButtonImage( btnClose, "texture/ui/PublicC.tga", 14, 14, 116, 175, TRUE )
+UI_SetButtonModalResult(btnClose, BUTTON_CLOSE)
+
+-- Monster name
+labMobDropsItemName = UI_CreateCompent(frmMobDrops, LABEL_TYPE, "labMobDropsItemName", 95, 8, 55, 48)
+UI_SetCaption(labMobDropsItemName, "*Monster name*")
+UI_SetTextColor(labMobDropsItemName, COLOR_BLACK)
+UI_SetLabelExFont(labMobDropsItemName, DEFAULT_FONT, TRUE, COLOR_WHITE)
+
+-- List of items
+lstItemDrop =  UI_CreateListView(frmMobDrops, "lstItemDrop", 200, 240, 28, 70, 2, 2)
+UI_SetListRowHeight( lstItemDrop, 38 )
+UI_SetMargin(lstItemDrop, 1, 6, 0, 0 ) 
+UI_SetListIsMouseFollow( lstItemDrop, TRUE)
+UI_ListViewSetTitle(lstItemDrop, 0, 50, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle(lstItemDrop, 1, 150, "", 0, 0, 0, 0 )
+
+--Get scroll bar
+scrollid = UI_GetScroll( lstItemDrop )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+--Load up button
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+--Loading scroll bar
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 43, 166, 10 )
+UI_SetSize( id, 11, 43 )
+
+--Load down button
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+----------------------------------
+
+----------------------------------------------------------------------------------------------------

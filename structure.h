@@ -37,14 +37,15 @@ namespace pkodev {
 	struct ChaRecord final {
 		const char nop0[0x04];
 		const int id;
-		const char nop1[0x0188];
+		const char name[0x0028];
+		const char nop1[0x0160];
 		const ItemPair items[MAX_ITEMS];
 	};
 
 	struct ItemRecord final {
 		const char nop0[0x04];
 		const int id;
-		const char name[72];
+		const char name[0x48];
 		const char nop1[0x70];
 		const char icon[17];
 	};

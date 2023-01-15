@@ -3,6 +3,7 @@
 #include <unordered_map>
 
 #include "GuiPic.h"
+#include "structure.h"
 
 namespace pkodev {
 
@@ -11,6 +12,7 @@ namespace pkodev {
         float chance{ 0.0f };
         std::string name;
         gui::CGuiPic icon;
+        ItemRecord* info{ nullptr };
     };
 
     using LootEnum = std::vector<LootItem>;

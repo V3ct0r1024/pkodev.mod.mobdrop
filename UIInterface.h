@@ -10,11 +10,11 @@ namespace pkodev { namespace gui {
 			~CUIInterface() = default;
 			static CUIInterface& Instance();
 			CForm* FindForm(const std::string& name);
-			void* FindMenu(const std::string& name);
+			CMenu* FindMenu(const std::string& name);
 
 		private:
 			CUIInterface();
-			void* m_This;
+			void* m_this;
 	};
 
 } }

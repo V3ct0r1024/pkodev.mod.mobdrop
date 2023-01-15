@@ -1,3 +1,7 @@
+----------------------------------------------------------------------------------------------------
+-- pkodev.mod.mobdrop
+----------------------------------------------------------------------------------------------------
+
 -- File: Client\scripts\lua\forms\system.clu
 -- Add the following scripts somewhere after creating the 'frmGame' form
 --     and declaring a variable with the same name

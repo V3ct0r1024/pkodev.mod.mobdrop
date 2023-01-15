@@ -1,6 +1,6 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
 #include <fstream>
+#include <sstream>
+#include <map>
 #include <unordered_map>
 #include <algorithm>
 
@@ -14,23 +14,48 @@
 #include "import.h"
 
 #include "Utils.h"
+
 #include "Render.h"
+
 #include "TextLabel.h"
 #include "GuiPic.h"
 #include "UIInterface.h"
 #include "Form.h"
+#include "Menu.h"
+#include "Label.h"
+#include "ListView.h"
 
 #include "Loot.h"
 
 
-const unsigned int MAX_NAME_LEN = 24;
+const unsigned int MAX_RENDER_NAME_LEN = 24;
+const unsigned int MAX_FORM_NAME_LEN = 20;
+const unsigned int MAX_FORM_CHANAME_LEN = 20;
 
 pkodev::Loot g_Loot;
 float g_DropRate = 1.0f;
 bool g_ShowDrop = false;
 
+template<typename ColorType>
+using PaletteType = std::map<float, ColorType, std::greater<float>>;
+
+const PaletteType<pkodev::gui::CTextLabel::Colors> g_RenderPalette = {
+    { 75.0f, pkodev::gui::CTextLabel::Colors::Green}, { 50.0f, pkodev::gui::CTextLabel::Colors::Yellow },
+    { 25.0f, pkodev::gui::CTextLabel::Colors::Orange }, { 0.0f, pkodev::gui::CTextLabel::Colors::Red }
+};
+
+const PaletteType<unsigned int> g_FormPalette = {
+    { 75.0f, 0xFF177245}, { 50.0f, 0xFFF4A900 },
+    { 25.0f, 0xFFFF8000}, { 0.0f, 0xFFFF0000 }
+};
+
+
+void __cdecl OnMonsterMenuPopup(pkodev::gui::CMenu* pSender, int x, int y, unsigned int key);
 
 float GetDropRate(const std::string& path);
+
+template<typename ColorType>
+ColorType GetColor(float percentage, const PaletteType<ColorType>& palette);
 
 
 BOOL APIENTRY DllMain( HMODULE hModule,
@@ -52,11 +77,6 @@ void GetModInformation(mod_info& info)
 void Start(const char* path)
 {
     using namespace pkodev;
-
-    AllocConsole();
-    freopen("CONOUT$", "w", stdout);
-    freopen("CONOUT$", "w", stderr);
-    std::cout << TOSTRING(MOD_NAME) << std::endl;
 
     char cfg_path[MAX_PATH]{ 0x00 };
     sprintf_s(cfg_path, sizeof(cfg_path), "%s\\%s.cfg", path, TOSTRING(MOD_NAME));
@@ -130,30 +150,24 @@ void __fastcall pkodev::hook::CHeadSay__Render(void* This,
 
     unsigned int i = 0;
     static char text[128]{0x00};
-    static gui::CTextLabel::Colors color{ gui::CTextLabel::Colors::White };
 
     for (const auto& item : it->second.loot)
     {
-        if (item.name.length() > MAX_NAME_LEN) {
+        if (item.name.length() > MAX_RENDER_NAME_LEN) {
             sprintf_s( text, sizeof(text), "%.2f%% %s...",
-                item.chance, item.name.substr(0, MAX_NAME_LEN - 3).c_str() );
+                item.chance, item.name.substr(0, MAX_RENDER_NAME_LEN - 3).c_str() );
         }
         else {
             sprintf_s(text, sizeof(text), "%.2f%% %s",
                 item.chance, item.name.c_str() );
         }
-        
-        if      (item.chance >= 75.0f) { color = gui::CTextLabel::Colors::Green;  }
-        else if (item.chance >= 50.0f) { color = gui::CTextLabel::Colors::Yellow; }
-        else if (item.chance >= 25.0f) { color = gui::CTextLabel::Colors::Orange; }
-        else                           { color = gui::CTextLabel::Colors::Red;    }
 
         const int x = screen.x + ( (i < 5) ? -180 : 64 );
         const int y = screen.y + 20 - 64 + (16 * ( (i < 5) ? i : (i - 5) ) );
 
         item.icon.Render( (x - item.icon.GetWidth() - 4), (y - 4) );
 
-        gui::CTextLabel::Render(text, x, y, color);
+        gui::CTextLabel::Render(text, x, y, GetColor(item.chance, g_RenderPalette));
        
         ++i;
     }
@@ -185,19 +199,17 @@ pkodev::stCharacter* __fastcall pkodev::hook::stNetActorCreate__CreateCha(
         if (Cha->Info->items[i].id == -1) { break; }
 
         LootItem item;
+        item.info = import::GetItemRecordInfo(Cha->Info->items[i].id);
+        item.chance = Cha->Info->items[i].Chance(g_DropRate);
 
-        const ItemRecord* info = import::GetItemRecordInfo(Cha->Info->items[i].id);
-     
-        if (info != nullptr) {
-            item.name = info->name;
-            item.icon.Load(gui::CGuiPic::GetIconFile(info->icon), 32, 32, 0.5f, 0.5f);
+        if (item.info != nullptr) {
+            item.name = item.info->name;
+            item.icon.Load(gui::CGuiPic::GetIconFile(item.info->icon), 32, 32, 0.5f, 0.5f);
         }
         else {
             item.name = "Unknown item";
             item.icon.Load(gui::CGuiPic::GetIconFile("error"), 32, 32, 0.5f, 0.5f);
         }
-
-        item.chance = Cha->Info->items[i].Chance(g_DropRate);
 
         items.loot.push_back(std::move(item));
     }
@@ -270,7 +282,7 @@ void __cdecl pkodev::hook::CSystemMgr___evtGameOptionFormBeforeShow(void* pForm,
 
     gui::CForm* frmGame = gui::CUIInterface::Instance().FindForm("frmGame");
     if (frmGame != nullptr) {
-        void* cbxDropInfo = frmGame->Find("cbxDropInfo");
+        void* cbxDropInfo = frmGame->Find<void*>("cbxDropInfo");
         if (cbxDropInfo != nullptr) {
             import::CCheckGroup__SetActiveIndex(cbxDropInfo, ( (g_ShowDrop == false) ? 0 : 1) );
         }
@@ -295,7 +307,7 @@ void __cdecl pkodev::hook::CSystemMgr___evtGameOptionFormMouseDown(void* pSender
     if ( ExtractString(pSender) == "btnYes" ) {
         gui::CForm* frmGame = gui::CUIInterface::Instance().FindForm("frmGame");
         if (frmGame != nullptr) {
-            void* cbxDropInfo = frmGame->Find("cbxDropInfo");
+            void* cbxDropInfo = frmGame->Find<void>("cbxDropInfo");
             if (cbxDropInfo != nullptr) {
                 const int idx = Utils::Get<int, 0xBC>(cbxDropInfo);
                 g_ShowDrop = ( (idx == 0) ? false : true );
@@ -319,13 +331,79 @@ void __fastcall pkodev::hook::CStartMgr__PopMenu(void* This, void*, const stChar
         return;
     }
 
-    static void* mobMouseRight = gui::CUIInterface::Instance().FindMenu("mobMouseRight");
+    static gui::CMenu* mobMouseRight = gui::CUIInterface::Instance().FindMenu("mobMouseRight");
     if (mobMouseRight == nullptr) {
         return;
     }
     
     const Vector2D<int> screen = gui::CRender::WorldToScreen({ pCha->x, pCha->y, pCha->z });
+    
+    mobMouseRight->OnMouseDown(&OnMonsterMenuPopup);
+    mobMouseRight->SetPointer(pCha);
+    
     pMain800->PopMenu(mobMouseRight, screen.x, screen.y);
+}
+
+void __cdecl OnMonsterMenuPopup(pkodev::gui::CMenu* pSender, int x, int y, unsigned int key)
+{
+    using namespace pkodev;
+
+    pSender->SetIsShow(false);
+
+    const stCharacter* pCha = pSender->GetPointer<stCharacter>();
+    if (pCha == nullptr) {
+        return;
+    }
+
+    static gui::CForm* frmMobDrops = gui::CUIInterface::Instance().FindForm("frmMobDrops");
+    if (frmMobDrops == nullptr) {
+        return;
+    }
+
+    static gui::CLabel* labMobDropsItemName = frmMobDrops->Find<gui::CLabel>("labMobDropsItemName");
+    if (labMobDropsItemName != nullptr) 
+    {
+        const std::string chaName(pCha->Info->name);
+        labMobDropsItemName->SetCaption(
+            ( chaName.length() > MAX_FORM_CHANAME_LEN ) 
+                ? chaName.substr(0, MAX_FORM_CHANAME_LEN - 3).append("...")
+                : chaName
+        );
+    }
+
+    static gui::CListView* lstItemDrop = frmMobDrops->Find<gui::CListView>("lstItemDrop");
+    if (lstItemDrop != nullptr)
+    {
+        lstItemDrop->GetList()->SetIsChangeColor(false);
+        lstItemDrop->GetList()->GetItems()->Clear();
+
+        const auto it = g_Loot.find(pCha->Info->id);
+        if (it != g_Loot.end()) 
+        {
+            static char text[128]{ 0x00 };
+            for (const auto& item : it->second.loot)
+            {
+                if (item.info == nullptr) { continue; }
+
+                if (item.name.length() > MAX_FORM_NAME_LEN) {
+                    sprintf_s(text, sizeof(text), "%s...\n%.2f%%",
+                        item.name.substr(0, MAX_FORM_NAME_LEN - 3).c_str(), item.chance);
+                }
+                else {
+                    sprintf_s(text, sizeof(text), "%s\n%.2f%%",
+                        item.name.c_str(), item.chance);
+                }
+
+                gui::CItemRow* row = lstItemDrop->GetList()->GetItems()->NewItem();
+                row->SetIndex(0, gui::CItemCommand::Create(item.info));
+                row->SetIndex(1, gui::CItemEx::Create(text, GetColor(item.chance, g_FormPalette)));
+
+                lstItemDrop->Refresh();
+            }
+        }
+    }
+
+    frmMobDrops->Show();
 }
 
 float GetDropRate(const std::string& path)
@@ -343,4 +421,20 @@ float GetDropRate(const std::string& path)
     file.close();
     
     return ret;
+}
+
+template<typename ColorType>
+ColorType GetColor(float percentage, const PaletteType<ColorType>& palette)
+{
+    if (palette.empty() == true) {
+        return static_cast<ColorType>(0xFFFFFFFF);
+    }
+
+    for (const auto& [threshold, color] : palette) {
+        if (percentage >= threshold) {
+            return color;
+        }
+    }
+
+    return palette.cend()->second;
 }
