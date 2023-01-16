@@ -268,7 +268,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Game.exe 1.3x_1 Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>D:\pkodev\сервер и клиент\Пиратия Online\mods\pkodev.mod.mobdrop\</OutDir>
+    <OutDir>$(ProjectDir)bin\</OutDir>
     <TargetName>pkodev.mod.mobdrop.client.13x_1</TargetName>
     <IncludePath>$(ProjectDir)lib\detours\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>$(ProjectDir)lib\detours\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>

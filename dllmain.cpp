@@ -398,7 +398,7 @@ void __cdecl OnMonsterMenuPopup(pkodev::gui::CMenu* pSender, int x, int y, unsig
                 row->SetIndex(0, gui::CItemCommand::Create(item.info));
                 row->SetIndex(1, gui::CItemEx::Create(text, GetColor(item.chance, g_FormPalette)));
 
-                lstItemDrop->Refresh();
+                lstItemDrop->Refresh(); // Updates scrollar
             }
         }
     }

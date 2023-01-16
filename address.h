@@ -85,6 +85,40 @@ namespace pkodev {  namespace address {
 
             // void CCheckGroup::SetActiveIndex(int n)  
             const unsigned int CCheckGroup__SetActiveIndex = 0x00426A50;
+
+            // void  CStartMgr::PopMenu(CCharacter* pCha)
+            const unsigned int CStartMgr__PopMenu = 0x0047CDE0;
+
+            /*
+                void CWorldScene::_FrameMove(DWORD dwTimeParam)
+                pCha = HitSelectCharacter( nMouseX, nMouseY, enumSC_PLAYER )
+                6A 00 | push 0
+            */
+            const unsigned int HitSelectCharacter__nSelect = 0x004CD958;
+
+            // void CForm::PopMenu( CMenu* pMenu, int x, int y )
+            const unsigned int CForm__PopMenu = 0x00493580;
+
+            // void CForm::Show()
+            const unsigned int CForm__Show = 0x00493FD0;
+
+            // static CMenu* CMenu::FindMenu(const char* name)
+            const unsigned int CMenu__FindMenu = 0x00499400;
+
+            // inline void CItemRow::SetIndex(unsigned int v, CItemObj* p)
+            const unsigned int CItemRow__SetIndex = 0x0042B410;
+
+            // CItemRow* CListItems::NewItem()
+            const unsigned int CListItems__NewItem = 0x0042DE00;
+
+            // T* operator new(unsigned int size)
+            const unsigned int operator_new = 0x0059C988;
+
+            // CItemEx::CItemEx(const char* str, DWORD c)
+            const unsigned int CItemEx__CItemEx = 0x00446310;
+
+            // CItemCommand::CItemCommand(CItemRecord* pItem)
+            const unsigned int CItemCommand__CItemCommand = 0x004898E0;
         }
 
         // Game.exe 1 (1243412597)
@@ -289,6 +323,40 @@ namespace pkodev {  namespace address {
 
             // void CCheckGroup::SetActiveIndex(int n)  
             const unsigned int CCheckGroup__SetActiveIndex = 0x00426A50;
+
+            // void  CStartMgr::PopMenu(CCharacter* pCha)
+            const unsigned int CStartMgr__PopMenu = 0x0047CF40;
+
+            /*
+                void CWorldScene::_FrameMove(DWORD dwTimeParam)
+                pCha = HitSelectCharacter( nMouseX, nMouseY, enumSC_PLAYER )
+                6A 00 | push 0
+            */
+            const unsigned int HitSelectCharacter__nSelect = 0x004CDB38;
+
+            // void CForm::PopMenu( CMenu* pMenu, int x, int y )
+            const unsigned int CForm__PopMenu = 0x00493730;
+
+            // void CForm::Show()
+            const unsigned int CForm__Show = 0x00494180;
+
+            // static CMenu* CMenu::FindMenu(const char* name)
+            const unsigned int CMenu__FindMenu = 0x004995B0;
+
+            // inline void CItemRow::SetIndex(unsigned int v, CItemObj* p)
+            const unsigned int CItemRow__SetIndex = 0x0042B410;
+
+            // CItemRow* CListItems::NewItem()
+            const unsigned int CListItems__NewItem = 0x0042DE00;
+
+            // T* operator new(unsigned int size)
+            const unsigned int operator_new = 0x0059CB88;
+
+            // CItemEx::CItemEx(const char* str, DWORD c)
+            const unsigned int CItemEx__CItemEx = 0x00446310;
+
+            // CItemCommand::CItemCommand(CItemRecord* pItem)
+            const unsigned int CItemCommand__CItemCommand = 0x00489A40;
         }
 
         // Game.exe 3 (1244511158)
@@ -374,6 +442,40 @@ namespace pkodev {  namespace address {
 
             // void CCheckGroup::SetActiveIndex(int n)  
             const unsigned int CCheckGroup__SetActiveIndex = 0x00426A50;
+
+            // void  CStartMgr::PopMenu(CCharacter* pCha)
+            const unsigned int CStartMgr__PopMenu = 0x0047CF30;
+
+            /*
+                void CWorldScene::_FrameMove(DWORD dwTimeParam)
+                pCha = HitSelectCharacter( nMouseX, nMouseY, enumSC_PLAYER )
+                6A 00 | push 0
+            */
+            const unsigned int HitSelectCharacter__nSelect = 0x004CDB28;
+
+            // void CForm::PopMenu( CMenu* pMenu, int x, int y )
+            const unsigned int CForm__PopMenu = 0x00493720;
+
+            // void CForm::Show()
+            const unsigned int CForm__Show = 0x00494170;
+
+            // static CMenu* CMenu::FindMenu(const char* name)
+            const unsigned int CMenu__FindMenu = 0x004995A0;
+
+            // inline void CItemRow::SetIndex(unsigned int v, CItemObj* p)
+            const unsigned int CItemRow__SetIndex = 0x0042B410;
+
+            // CItemRow* CListItems::NewItem()
+            const unsigned int CListItems__NewItem = 0x0042DE00;
+
+            // T* operator new(unsigned int size)
+            const unsigned int operator_new = 0x0059CB88;
+
+            // CItemEx::CItemEx(const char* str, DWORD c)
+            const unsigned int CItemEx__CItemEx = 0x00446310;
+
+            // CItemCommand::CItemCommand(CItemRecord* pItem)
+            const unsigned int CItemCommand__CItemCommand = 0x00489A30;
         }
 
         // Game.exe 4 (1585009030)
@@ -459,6 +561,40 @@ namespace pkodev {  namespace address {
 
             // void CCheckGroup::SetActiveIndex(int n)  
             const unsigned int CCheckGroup__SetActiveIndex = 0x00426B80;
+
+            // void  CStartMgr::PopMenu(CCharacter* pCha)
+            const unsigned int CStartMgr__PopMenu = 0x0047D0B0;
+
+            /*
+                void CWorldScene::_FrameMove(DWORD dwTimeParam)
+                pCha = HitSelectCharacter( nMouseX, nMouseY, enumSC_PLAYER )
+                6A 00 | push 0
+            */
+            const unsigned int HitSelectCharacter__nSelect = 0x004CDD08;
+
+            // void CForm::PopMenu( CMenu* pMenu, int x, int y )
+            const unsigned int CForm__PopMenu = 0x00493930;
+
+            // void CForm::Show()
+            const unsigned int CForm__Show = 0x00494380;
+
+            // static CMenu* CMenu::FindMenu(const char* name)
+            const unsigned int CMenu__FindMenu = 0x004997B0;
+
+            // inline void CItemRow::SetIndex(unsigned int v, CItemObj* p)
+            const unsigned int CItemRow__SetIndex = 0x0042B540;
+
+            // CItemRow* CListItems::NewItem()
+            const unsigned int CListItems__NewItem = 0x0042DF30;
+
+            // T* operator new(unsigned int size)
+            const unsigned int operator_new = 0x0059CF08;
+
+            // CItemEx::CItemEx(const char* str, DWORD c)
+            const unsigned int CItemEx__CItemEx = 0x00446440;
+
+            // CItemCommand::CItemCommand(CItemRecord* pItem)
+            const unsigned int CItemCommand__CItemCommand = 0x00489C30;
         }
 
         // Game.exe 5 (1207214236)
@@ -544,6 +680,40 @@ namespace pkodev {  namespace address {
 
             // void CCheckGroup::SetActiveIndex(int n)  
             const unsigned int CCheckGroup__SetActiveIndex = 0x00426A40;
+
+            // void  CStartMgr::PopMenu(CCharacter* pCha)
+            const unsigned int CStartMgr__PopMenu = 0x0047CAB0;
+
+            /*
+                void CWorldScene::_FrameMove(DWORD dwTimeParam)
+                pCha = HitSelectCharacter( nMouseX, nMouseY, enumSC_PLAYER )
+                6A 00 | push 0
+            */
+            const unsigned int HitSelectCharacter__nSelect = 0x004CD788;
+
+            // void CForm::PopMenu( CMenu* pMenu, int x, int y )
+            const unsigned int CForm__PopMenu = 0x00493380;
+
+            // void CForm::Show()
+            const unsigned int CForm__Show = 0x00493DD0;
+
+            // static CMenu* CMenu::FindMenu(const char* name)
+            const unsigned int CMenu__FindMenu = 0x00499200;
+
+            // inline void CItemRow::SetIndex(unsigned int v, CItemObj* p)
+            const unsigned int CItemRow__SetIndex = 0x0042B400;
+
+            // CItemRow* CListItems::NewItem()
+            const unsigned int CListItems__NewItem = 0x0042DDF0;
+
+            // T* operator new(unsigned int size)
+            const unsigned int operator_new = 0x0059C808;
+
+            // CItemEx::CItemEx(const char* str, DWORD c)
+            const unsigned int CItemEx__CItemEx = 0x00445FB0;
+
+            // CItemCommand::CItemCommand(CItemRecord* pItem)
+            const unsigned int CItemCommand__CItemCommand = 0x004895B0;
         }
     
 }}
