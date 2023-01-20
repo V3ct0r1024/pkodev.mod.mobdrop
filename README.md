@@ -7,8 +7,14 @@ Modification for the game client. Displays information about drops from monsters
 
 ![0](https://user-images.githubusercontent.com/3164064/210767064-9b016054-f38e-48bf-b87b-4a6e2b4042f1.png)
 
-
 ![1](https://user-images.githubusercontent.com/3164064/210767232-5b74d392-7254-44e6-8bd4-4395b8725e94.png)
+
+![2](https://user-images.githubusercontent.com/3164064/213776250-881222b6-094d-44ab-bb62-73bc236b2165.png)
+
+![4](https://user-images.githubusercontent.com/3164064/213776113-02a5335e-cbe6-4272-9ec5-c9a7c2c4f264.png)
+
+![5](https://user-images.githubusercontent.com/3164064/213776122-4a33269d-7fcd-4197-b608-0f9e0b11d3c7.png)
+
 
 ## Discussion on the forum
 
