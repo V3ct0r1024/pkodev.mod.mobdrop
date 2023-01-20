@@ -119,6 +119,12 @@ namespace pkodev {  namespace address {
 
             // CItemCommand::CItemCommand(CItemRecord* pItem)
             const unsigned int CItemCommand__CItemCommand = 0x004898E0;
+
+            // CItemRow* CListItems::GetItem(int index)
+            const unsigned int CListItems__GetItem = 0x0042C020;
+
+            // bool CGuiData::SetHintItem( CItemObj* pObj )
+            const unsigned int CGuiData__SetHintItem = 0x004980C0;
         }
 
         // Game.exe 1 (1243412597)
@@ -238,6 +244,12 @@ namespace pkodev {  namespace address {
 
             // CItemCommand::CItemCommand(CItemRecord* pItem)
             const unsigned int CItemCommand__CItemCommand = 0x004899A0;
+
+            // CItemRow* CListItems::GetItem(int index)
+            const unsigned int CListItems__GetItem = 0x0042C020;
+
+            // bool CGuiData::SetHintItem( CItemObj* pObj )
+            const unsigned int CGuiData__SetHintItem = 0x004981D0;
         }
 
         // Game.exe 2 (1252912474)
@@ -357,6 +369,12 @@ namespace pkodev {  namespace address {
 
             // CItemCommand::CItemCommand(CItemRecord* pItem)
             const unsigned int CItemCommand__CItemCommand = 0x00489A40;
+
+            // CItemRow* CListItems::GetItem(int index)
+            const unsigned int CListItems__GetItem = 0x0042C020;
+
+            // bool CGuiData::SetHintItem( CItemObj* pObj )
+            const unsigned int CGuiData__SetHintItem = 0x00498270;
         }
 
         // Game.exe 3 (1244511158)
@@ -476,6 +494,12 @@ namespace pkodev {  namespace address {
 
             // CItemCommand::CItemCommand(CItemRecord* pItem)
             const unsigned int CItemCommand__CItemCommand = 0x00489A30;
+
+            // CItemRow* CListItems::GetItem(int index)
+            const unsigned int CListItems__GetItem = 0x0042C020;
+
+            // bool CGuiData::SetHintItem( CItemObj* pObj )
+            const unsigned int CGuiData__SetHintItem = 0x00498260;
         }
 
         // Game.exe 4 (1585009030)
@@ -595,6 +619,12 @@ namespace pkodev {  namespace address {
 
             // CItemCommand::CItemCommand(CItemRecord* pItem)
             const unsigned int CItemCommand__CItemCommand = 0x00489C30;
+
+            // CItemRow* CListItems::GetItem(int index)
+            const unsigned int CListItems__GetItem = 0x0042C150;
+
+            // bool CGuiData::SetHintItem( CItemObj* pObj )
+            const unsigned int CGuiData__SetHintItem = 0x00498470;
         }
 
         // Game.exe 5 (1207214236)
@@ -714,6 +744,12 @@ namespace pkodev {  namespace address {
 
             // CItemCommand::CItemCommand(CItemRecord* pItem)
             const unsigned int CItemCommand__CItemCommand = 0x004895B0;
+
+            // CItemRow* CListItems::GetItem(int index)
+            const unsigned int CListItems__GetItem = 0x0042C010;
+
+            // bool CGuiData::SetHintItem( CItemObj* pObj )
+            const unsigned int CGuiData__SetHintItem = 0x00497EC0;
         }
     
 }}

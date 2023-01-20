@@ -128,6 +128,17 @@ namespace pkodev {
 			// CItemCommand::CItemCommand(CItemRecord* pItem)
 			typedef void(__thiscall* CItemCommand__CItemCommand__Ptr)(void*, const ItemRecord* item);
 			static CItemCommand__CItemCommand__Ptr CItemCommand__CItemCommand;
+			
+			// CItemRow* CListItems::GetItem(int index)
+			typedef gui::CItemRow* (__thiscall* CListItems__GetItem__Ptr)(void*, int);
+			static CListItems__GetItem__Ptr CListItems__GetItem;
+
+			// bool CGuiData::SetHintItem(CItemObj* pObj)
+			typedef bool(__cdecl* CGuiData__SetHintItem__Ptr)(gui::CItemObj*);
+			static CGuiData__SetHintItem__Ptr CGuiData__SetHintItem;
+			
+			// CCompent* CListView::GetHintCompent(int x, int y)   
+			typedef void* (__thiscall* CListView__GetHintCompent__Ptr)(gui::CListView*, int, int);
 
 	};
 

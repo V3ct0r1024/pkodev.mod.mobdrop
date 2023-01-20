@@ -32,5 +32,6 @@ namespace pkodev {
 	import::operator_new__Ptr import::operator_new = reinterpret_cast<import::operator_new__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::operator_new));
 	import::CItemEx__CItemEx__Ptr import::CItemEx__CItemEx = reinterpret_cast<import::CItemEx__CItemEx__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CItemEx__CItemEx));
 	import::CItemCommand__CItemCommand__Ptr import::CItemCommand__CItemCommand = reinterpret_cast<import::CItemCommand__CItemCommand__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CItemCommand__CItemCommand));
-
+	import::CListItems__GetItem__Ptr import::CListItems__GetItem = reinterpret_cast<import::CListItems__GetItem__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CListItems__GetItem));
+	import::CGuiData__SetHintItem__Ptr import::CGuiData__SetHintItem = reinterpret_cast<import::CGuiData__SetHintItem__Ptr>(reinterpret_cast<void*>(address::MOD_EXE_VERSION::CGuiData__SetHintItem));
 }

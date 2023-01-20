@@ -58,6 +58,8 @@ template<typename ColorType>
 ColorType GetColor(float percentage, const PaletteType<ColorType>& palette);
 
 
+void* __fastcall CCompent__MyGetHintCompent(pkodev::gui::CListView* This, void*, int x, int y);
+
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
@@ -374,6 +376,9 @@ void __cdecl OnMonsterMenuPopup(pkodev::gui::CMenu* pSender, int x, int y, unsig
     static gui::CListView* lstItemDrop = frmMobDrops->Find<gui::CListView>("lstItemDrop");
     if (lstItemDrop != nullptr)
     {
+        Utils::Set<import::CListView__GetHintCompent__Ptr, 0x6C>(Utils::Get<void*>(lstItemDrop),
+            reinterpret_cast<import::CListView__GetHintCompent__Ptr>(&CCompent__MyGetHintCompent));
+
         lstItemDrop->GetList()->SetIsChangeColor(false);
         lstItemDrop->GetList()->GetItems()->Clear();
 
@@ -404,6 +409,33 @@ void __cdecl OnMonsterMenuPopup(pkodev::gui::CMenu* pSender, int x, int y, unsig
     }
 
     frmMobDrops->Show();
+}
+
+void* __fastcall CCompent__MyGetHintCompent(pkodev::gui::CListView* This, void*, int x, int y)
+{
+    using namespace pkodev;
+
+    if ( (This->GetIsShow() == true) && (This->InRect(x, y) == true) ) 
+    {
+        const int rowIndex = This->GetList()->GetItems()->PointToRow(x, y);
+        if (rowIndex != -1)
+        {
+            gui::CItemRow* row = This->GetList()->GetItems()->GetItem(rowIndex);
+            if (row == nullptr) {
+                return nullptr;
+            }
+
+            gui::CItemObj* object = row->GetIndex(0);
+            if (object == nullptr) {
+                return nullptr;
+            }
+
+            import::CGuiData__SetHintItem(object);
+            return This;
+        }
+    }
+
+    return nullptr;
 }
 
 float GetDropRate(const std::string& path)
